@@ -1,0 +1,99 @@
+poligonal_sources_out                                                           
+ 
+ Summary of Attenuation relationship used in the analysis:
+ 
+Number of Problems:      1
+Number of Attenuation Types:      1
+ 
+Spectral Period  =     0.0100
+Sigma Trunc      =     3.0000
+Directivity Flag =          0
+Ground Motion Values:
+         NaN
+      0.0100
+      0.0294
+      0.0540
+      0.0934
+      0.1271
+      0.1672
+      0.2119
+      0.2200
+      0.2300
+      0.3235
+      0.4412
+      0.5600
+      0.6300
+      0.9000
+ 
+Attenuation Type =      1
+  Jcalc    Const1   Const2   Weight   SigVaradd  Scalc    SigFix   SSSCalc    iMix
+   836     0.0000   0.0000  1.00000     0.0000                                    1
+ 
+ 
+ psCorFlag =   0
+ 
+  fault area (km^2) =    0.114E+04
+  fault area (km^2) =    0.128E+04
+  fault area (km^2) =    0.161E+04
+  fault area (km^2) =    0.181E+04
+  fault area (km^2) =    0.105E+04
+  fault area (km^2) =    0.979E+03
+  fault area (km^2) =    0.169E+02
+  fault area (km^2) =    0.117E+04
+  fault area (km^2) =    0.254E+04
+  fault area (km^2) =    0.336E+04
+  fault area (km^2) =    0.430E+04
+ 
+ Output filename for hazard curves:  kamag_pga_haz_bgu_segmented.txt                                                 
+ 
+ Summary of Faults used in the analysis:
+ 
+      33          Number of faults
+ 
+    Fault Name                  nFlt System Number
+ --------------------------------------------------
+Kamag_Areal                       1    1
+Shivta_Areal                      2    2
+Kinarot_Linear                    3    3
+Jericho_Vally_Linear              4    4
+Dead_Sea_East_Linear              5    5
+North_Arava_Linear                6    6
+Central_Arava_Linear              7    7
+Avrona_Linear                     8    8
+Zin_Active                        9    9
+Aragonese_Areal                  10   10
+Arif_Areal                       11   11
+Arnona_Areal                     12   12
+Barak_Areal                      13   13
+Beit_Shean_Areal                 14   14
+Central_Israel_Areal             15   15
+Cyprus_Areal                     16   16
+East_Sinai_Areal                 17   17
+Elat_Areal                       18   18
+Galil_Areal                      19   19
+Mediterranean_1_Areal            20   20
+Mediterranean_2_Areal            21   21
+Mediterranean_3_Areal            22   22
+Milhan_Areal                     23   23
+Notrh_Jordan_Areal               24   24
+Palmira_Areal                    25   25
+Paran_Areal                      26   26
+Suez_Areal                       27   27
+Thamad_Areal                     28   28
+W_Shiarn_Areal                   29   29
+Carmel_Linear                    30   30
+Roum_Linear                      31   31
+Serghaya_Linear                  32   32
+YHK_Linear                       33   33
+ -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+ 
+ Filename for deaggregation output:  kamag_pga_deaggragation_bgu_segmented.txt                                       
+ 
+    5      Number of Magnitude Bins
+     4.000     5.000     6.000     7.000     8.000
+    7      Number of Distance Bins 
+     0.707    10.000    50.000   100.000   200.000   300.000   620.669
+    6      Number of Epsilon Bins  
+    -7.672    -1.000     0.000     1.000     2.000    16.458
+    7      Number of Xcos(T) Bins  
+     0.000     0.100     0.200     0.300     0.350     0.400     2.000
