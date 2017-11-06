@@ -1,10 +1,10 @@
 """
 this script written by Yona Pashchur, at Nov 2017.
-the script take all out-file in "outfile" folder and find relevent data from it.
+the script take all out-file in "outfile" folder and find relevant data from it.
 data define in config file.
 the script made cav file. and save it in csv_data folder
 
-if samethings goes worng please let me know :)
+if somethings goes wrong please let me know :)
 """
 
 import numpy as np
@@ -18,11 +18,13 @@ global del_value
 config = {}
 execfile("shivta.conf", config)
 header_ori = config['header'] 
-value = config['value'] #poisson or samething else
+value = config['value'] # poisson or something else
 location = config['cor']
 del_value = config['nonrelevent']
 
+
 def orgenize_line(header_ori, lat=None, lng=None):
+
 	"""
 	this function get line from 'out' file, 
 	and reorganize it.
@@ -34,14 +36,15 @@ def orgenize_line(header_ori, lat=None, lng=None):
 	if lat and lng:
 		ori_list[3], ori_list[4] = lat, lng
 	relist = []
-	#clean all space:
+	# clean all space:
 	for val in ori_list:
 		if val != "":
 			relist.append(val)
 
-	#clean new line if exist
+	# clean new line if exist
 	relist[-1] = relist[-1].split("\r")[0]
 	return relist
+
 
 def clean_array(array, head):
 	"""
@@ -62,9 +65,10 @@ def clean_array(array, head):
 			index = head.index(e)
 			colum_to_del.append(index)
 
-	# del the non relevent element from all matrix
-	b = np.delete(array, colum_to_del , axis=1)
+	# del the non relevant element from all matrix
+	b = np.delete(array, colum_to_del, axis=1)
 	return b
+
 
 def list_to_array(data, l):
 	"""
@@ -84,20 +88,23 @@ def list_to_array(data, l):
 	np.savetxt('../csv_data/'+value+date+".csv", a, delimiter=",", fmt='%s')
 	print "create csv file"
 
-#---------------------------------------#
-# start script here!                    #
+# --------------------------------------- #
+# start script here!                      #
+
 
 # define header line  to csv and store in data
 firs_line = orgenize_line(header_ori, "LAT", "LONG")
-data =[firs_line]
+data = [firs_line]
+
+lat, lng = 0, 0
 
 # take all "out" file
 files_name = glob.glob('../outfile/*.out')
 
-#run for all out file
+# run for all out file
 for item in files_name:
 	
-	#open file:
+	# open file:
 	out_read = open(item, 'r')
 	lines = out_read.readlines()
 	# find value in line, and store it
@@ -105,7 +112,7 @@ for item in files_name:
 		if location in line:
 
 			# find lat-long in site
-			# find site numer (case few site in one out-file)
+			# find site number (case few site in one out-file)
 			# for now - do nothing with site number #
 			cord = line.split(" ")
 			cord = orgenize_line(line)
@@ -118,6 +125,6 @@ for item in files_name:
 			line = orgenize_line(line, lat, lng)
 			data.append(line)
 	out_read.close()
- 
-l =len(data[-1])
+l = len(data[-1])
 list_to_array(data, l)
+
