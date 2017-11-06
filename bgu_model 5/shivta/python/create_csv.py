@@ -42,7 +42,7 @@ def orgenize_line(header_ori, lat=None, lng=None):
 			relist.append(val)
 
 	# clean new line if exist
-	relist[-1] = relist[-1].split("\r")[0]
+	relist[-1] = relist[-1].split("\r")[0].split("\n")[0]
 	return relist
 
 
@@ -117,11 +117,12 @@ for item in files_name:
 			cord = line.split(" ")
 			cord = orgenize_line(line)
 			lat, lng = cord[-1], cord[-2]
+			# del new line from lat
+			lat = lat.split("\n")[0]
 			site_num = cord[1]
 		
 		if value in line:
 			# find one value in file
-
 			line = orgenize_line(line, lat, lng)
 			data.append(line)
 	out_read.close()
