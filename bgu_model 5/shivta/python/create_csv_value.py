@@ -10,6 +10,7 @@ if somethings goes wrong please let me know :)
 import numpy as np
 import time
 import glob
+from common import orgenize_line
 
 global value
 global del_value
@@ -21,29 +22,6 @@ header_ori = config['header']
 value = config['value'] # poisson or something else
 location = config['cor']
 del_value = config['nonrelevent']
-
-
-def orgenize_line(header_ori, lat=None, lng=None):
-
-	"""
-	this function get line from 'out' file, 
-	and reorganize it.
-	remove space and add lat-lng value
-	return one list, contian line
-	"""
-
-	ori_list = header_ori.split(" ")
-	if lat and lng:
-		ori_list[3], ori_list[4] = lat, lng
-	relist = []
-	# clean all space:
-	for val in ori_list:
-		if val != "":
-			relist.append(val)
-
-	# clean new line if exist
-	relist[-1] = relist[-1].split("\r")[0].split("\n")[0]
-	return relist
 
 
 def clean_array(array, head):
@@ -93,7 +71,7 @@ def list_to_array(data, l):
 
 
 # define header line  to csv and store in data
-firs_line = orgenize_line(header_ori, "LAT", "LONG")
+firs_line = orgenize_line.orgenize(header_ori, "LAT", "LONG")
 data = [firs_line]
 
 lat, lng = 0, 0
@@ -115,7 +93,7 @@ for item in files_name:
 			# find site number (case few site in one out-file)
 			# for now - do nothing with site number #
 			cord = line.split(" ")
-			cord = orgenize_line(line)
+			cord = orgenize_line.orgenize(line)
 			lat, lng = cord[-1], cord[-2]
 			# del new line from lat
 			lat = lat.split("\n")[0]
@@ -123,7 +101,7 @@ for item in files_name:
 		
 		if value in line:
 			# find one value in file
-			line = orgenize_line(line, lat, lng)
+			line = orgenize_line.orgenize(line, lat, lng)
 			data.append(line)
 	out_read.close()
 l = len(data[-1])

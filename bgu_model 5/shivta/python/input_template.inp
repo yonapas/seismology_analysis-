@@ -1,0 +1,22 @@
+bgu_segmented.flt
+-90 90 -180 180  		minlat maxlat minlong maxlong
+1000  					maxdist
+poligonal_sources_out
+1 1 0  					nProb nAttentyp (nProb, nAttenType, 1 for mixture model 0 otherwise)
+0.01 3 0 					specT maxEps dirflag
+15						nAmps
+0.01 0.015 0.03	0.0536 0.065 0.07 0.0887 0.1 0.12 0.15 0.2 0.25 0.34 0.450
+1 						nGMmodels
+836	0 0 1 0 1			jCalc const1 const2 wts SigVaradd
+0  					psCorflag
+5  					nMagBin
+4 5 6 7 8  			MagBin
+7  					nDistBin
+1 20 50 100 200 300 400  	DistBin
+6  					nEspBin
+-3 -1 0 1 2 3  	EpsBin
+7					?????????????????????????
+0.0 0.10 0.20 0.30 0.35 0.40 2.0  ????????????????????????
+0  					soilAmpflag
+1					nSites
+34.635172 31.069403  1400 0.005 0.8 0.536 0.8 0  sitelong sitelat Vs30m Z1, Z1.5, Z2.5, Vrup, Forearc
