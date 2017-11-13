@@ -11,17 +11,16 @@ import numpy as np
 import time
 import glob
 from common import orgenize_line
+import settings
 
 global value
 global del_value
 
-# exe config file 
-config = {}
-execfile("shivta.conf", config)
-header_ori = config['header'] 
-value = config['value'] # poisson or something else
-location = config['cor']
-del_value = config['nonrelevent']
+
+header_ori = settings.header
+value = settings.value # poisson or something else
+location = settings.cor
+del_value = settings.nonrelevent
 
 
 def clean_array(array, head):
