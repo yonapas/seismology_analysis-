@@ -1,0 +1,45 @@
+poligonal_sources_out                                                           
+ 
+ Summary of Attenuation relationship used in the analysis:
+ 
+Number of Problems:      1
+Number of Attenuation Types:      1
+ 
+Spectral Period  =     0.0100
+Sigma Trunc      =     3.0000
+Directivity Flag =          0
+Ground Motion Values:
+         NaN
+      0.0100
+      0.0150
+      0.0300
+      0.0536
+      0.0650
+      0.0700
+      0.0887
+      0.1000
+      0.1200
+      0.1500
+      0.2000
+      0.2500
+      0.3400
+      0.4500
+ 
+Attenuation Type =      1
+  Jcalc    Const1   Const2   Weight   SigVaradd  Scalc    SigFix   SSSCalc    iMix
+   836     0.0000   0.0000  1.00000     0.0000                                    1
+ 
+ 
+ psCorFlag =   0
+ 
+  fault area (km^2) =    0.114E+04
+  fault area (km^2) =    0.128E+04
+  fault area (km^2) =    0.161E+04
+  fault area (km^2) =    0.181E+04
+  fault area (km^2) =    0.105E+04
+  fault area (km^2) =    0.979E+03
+  fault area (km^2) =    0.169E+02
+  fault area (km^2) =    0.117E+04
+  fault area (km^2) =    0.254E+04
+  fault area (km^2) =    0.336E+04
+  fault area (km^2) =    0.430E+04
