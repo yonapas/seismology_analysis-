@@ -11,17 +11,16 @@ import numpy as np
 import time
 import glob
 from common import orgenize_line
+import settings
 
 global value
 global del_value
 
-# exe config file 
-config = {}
-execfile("shivta.conf", config)
-header_ori = config['header'] 
-value = config['value'] # poisson or something else
-location = config['cor']
-del_value = config['nonrelevent']
+
+header_ori = settings.header
+value = settings.value # poisson or something else
+location = settings.cor
+del_value = settings.nonrelevent
 
 
 def clean_array(array, head):
@@ -95,8 +94,6 @@ for item in files_name:
 			cord = line.split(" ")
 			cord = orgenize_line.orgenize(line)
 			lat, lng = cord[-1], cord[-2]
-			# del new line from lat
-			lat = lat.split("\n")[0]
 			site_num = cord[1]
 		
 		if value in line:

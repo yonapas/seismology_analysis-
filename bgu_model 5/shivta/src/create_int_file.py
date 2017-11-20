@@ -1,16 +1,12 @@
-import numpy as np
 import utm
-# from src.common import orgenize_line
-from common import orgenize_line
 import time
+import settings
 
 
-config = {}
-execfile("shivta.conf", config)
-grid_csv = config['grid_csv']
-input_template = config['input_template']
-finel_input = config['finel_input']
-first_line = config['cordinate_line']
+grid_csv = settings.grid_csv
+input_template = settings.input_template
+final_input = settings.finel_input
+first_line = settings.cordinate_line
 
 global israel_latt
 global israel_num
@@ -25,14 +21,18 @@ def from_utm(data):
 	lat_cor, lng_cor = cordinate[0], cordinate[1]
 	return round(lat_cor, 6), round(lng_cor, 6), int(num)
 
+
 def save_input(data):
 	date = time.strftime("%Y%m%d%H%M")
-	finel = open(finel_input+date+".int", 'w')
+	finel = open(final_input+date+".inp", 'w')
 
 	for line in data:
+		# if type(line) == list:
+			# print line
+			#line = ' '.join(line)
 		finel.write(line)
+	finel.close()
 	print "create input file"
-
 
 
 def create_input(data, input_file):
@@ -43,22 +43,23 @@ def create_input(data, input_file):
 	"""
 	number_of_sites = len(data)
 	finput = open(input_file, 'r').readlines()
-	finput[-2] = finput[-2].replace('1', str(number_of_sites))
-	print header
+	finput[-1] = finput[-1].replace('1', str(number_of_sites))
+	# print header
 	all_site_data =[]
+
 	for site in data:
-		title = header
-		lat, lng = site[0], site[1]
-		title[0], title[1] = lng, lat
-		all_site_data.append(title)
-		for num in range(1,6):
-			all_site_data.append("out_{0}_{1}_{2}.out".format(num, lng, lat))
-	print len(all_site_data)
+		title = ''.join(first_line)
+		_lat, _lng = str(site[0]), str(site[1])
+		tit = title.replace("LNG", _lng).replace("LAT", _lat)
+		all_site_data.append(tit)
+		# print all_site_data , "\n\n"
+		for num in range(0,6):
+			all_site_data.append("out_{0}_{1}_{2}.out\n".format(num, _lng, _lat))
+
 	finput = finput+all_site_data
+	print finput
 	save_input(finput)
 
-
-header = orgenize_line.orgenize(first_line)
 
 csv_data = open(grid_csv, "r").readlines()
 del csv_data[0]
@@ -66,6 +67,7 @@ cord_data = []
 
 for line in csv_data:
 	lat, lng, num = from_utm(line)
-	cord_data.append([lat, lng, num])
+	cord_data.append([str(lat), str(lng), num])
 
 create_input(cord_data, input_template)
+
