@@ -81,6 +81,6 @@ if __name__ == "__main__":
         print "[ ERROR ] you must supply seven arguments: output-shapefile-name.shp xmin xmax ymin ymax gridHeight gridWidth"
         # python grid.py grid.shp 992325.66 1484723.41 494849.32 781786.14 10000 10000
         # 
-        sys.exit( 1 )
+        sys.exit(1)
 
-    main( sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7] )
+    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7] )
