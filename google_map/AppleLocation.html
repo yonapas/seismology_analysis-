@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Core CSS - Include with every page -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="MainMap.css">
+
+<div class="container">
+  
+<nav class="well well-lg">
+  <p>
+  <label class="btn btn-default btn-file">
+    Browse File <input type="file" accept=".csv" id="fileinput" multiple style="display: none;"> 
+    <span class="badge" id="number_file"></span>
+     </label>
+  </p>
+  	<script src="js/jquery-1.10.2.js"></script>
+	<script src="read_csv.js"></script> <!-- FUNTION_LIST : read_CSV, csv_JSON-->
+
+	<!--<script src="add_point.js"></script> -->
+
+	<script type="text/javascript">
+
+	var files;
+	var counter = {"max": 0, "num": 0};
+	var mac_list;
+	var first_file;
+	var last_file = false;
+	var mac;
+	
+	function next_csv(bool){
+
+		if (files){
+			//check_counter();
+			x = counter.num;
+			if (!first_file && !last_file) {remove("file"+x.toString())};
+
+			if (bool && counter.num < counter.max){
+				counter.num ++;
+				var r = new FileReader();
+	      		r.onload = function(e) { 
+			    var contents = e.target.result;
+			    var data = csv_JSON(contents, ",")
+				read_CSV(JSON.parse(data), counter.num)
+				show_file_name(counter.num-1)
+				first_file = false;
+				}
+
+			r.readAsText(files[counter.num-1]);
+				
+		} 
+
+			if (! bool) {
+				counter.num --;
+				//check_counter();
+				//update mac list for file:
+				manageMacList(mac_list, false);
+			}  
+    }
+}
+
+  function readMultipleFiles(evt) {
+    //Retrieve all the files from the FileList object
+    files = evt.target.files; 
+    all_ap = {};
+    first_file = true;
+    last_file = false;
+
+    if (files && first_file) {
+    	// counte number of file
+    	counter.max = files.length
+    	show_num_files(counter.max) //
+    	next_csv(true);
+
+    }
+    else {
+	      alert("Failed to load files"); 
+    }
+  }
+  
+  document.getElementById('fileinput').addEventListener('change', readMultipleFiles, false);
+
+</script>
+<p>
+<button type="button" class="btn btn-success" onclick="next_csv(false)" data-toggle="tooltip" data-placement="top" title="remove poly..."><i class="fa fa-trash-o fa-lg"></i> Remove</button>
+<button type="button" class="btn btn-success" onclick="next_csv(true)" data-toggle="tooltip" data-placement="bottom" title="next file!"><i class="glyphicon glyphicon-screenshot"></i> Apply</button>
+</p>
+<p><label for="myText">FILE NAME: </label>
+<div class="alert alert-success" role="alert" id="myText" size=30>
+<script>
+function show_file_name(num) {
+	// show correct file name
+    document.getElementById("myText").innerHTML = files[num].name;
+}
+function show_num_files(num) {
+	// show on page number of file
+	// num = number of file
+    document.getElementById("number_file").innerHTML = num;
+}
+</script>
+</div></p>
+<p><label for="myText"> number of piont : </label>
+<div class="alert alert-success" role="alert" id="myText" size=30>
+	<script>
+function show_file_name(num) {
+	// show correct file name
+    document.getElementById("myText").innerHTML = num_of_point;
+}
+</script>
+</div>
+</p>
+</nav>
+	<div id="map_canvas" dir="rtl"></div>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&signed_in=true&libraries=geometry&key=AIzaSyC6xgoNlbUqtEQVIfqWmbuiLI9Brh5PQCY&language=iw"></script>
+
+		<script type="text/javascript">
+
+
+		//set maps settings, center of map - by dog's location. 
+		var mapOptions = {
+		    zoom: 14,
+		    disableDoubleClickZoom: true,
+		    mapTypeControl: true,
+		    mapTypeId: google.maps.MapTypeId.TERRAIN,
+		    center: {lat: 31.26608 , lng: 34.81279488} // Beer Sheva
+		};
+
+		// set map on canvas
+		var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+		//var dogs_list = DogsLocation(map); // load Dogs Location/
+
+		var all_point = []
+		var num_file;
+
+		function updatepoint(all_point, num_file){
+	   	
+		   	info_point = all_point[num_file]["info"];
+			for (var i in info_point){
+				point_list.push(info_point[i]["content"]);
+			}
+
+			var num_of_point = all_point.length;
+
+		};
+
+	</script>
+
+</div>
+
+</body>
+</html>
