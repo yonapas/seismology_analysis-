@@ -6,3 +6,4 @@ grid_csv = "osgeo/grid_israel.csv"
 input_template = "input_template.inp"
 finel_input = "../infile/grid_all_isreal"
 cordinate_line = "LNG LAT  1400 0.005 0.8 0.536 0.8 0  sitelong sitelat Vs30m Z1, Z1.5, Z2.5, Vrup, Forearc\n"
+interapt_values = [0.5, 0.22, 0.40]

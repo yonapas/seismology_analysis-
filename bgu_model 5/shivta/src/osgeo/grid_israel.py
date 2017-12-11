@@ -71,16 +71,22 @@ def main(outputGridfn,xmin,xmax,ymin,ymax,gridHeight,gridWidth):
     outDataSource.Destroy()
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
     #
     # example run : $ python grid.py <full-path><output-shapefile-name>.shp xmin xmax ymin ymax gridHeight gridWidth
     #
 
-    if len( sys.argv ) != 8:
-        print "[ ERROR ] you must supply seven arguments: output-shapefile-name.shp xmin xmax ymin ymax gridHeight gridWidth"
+    #if len( sys.argv ) != 8:
+    #   print "[ ERROR ] you must supply seven arguments: output-shapefile-name.shp xmin xmax ymin ymax gridHeight gridWidth"
         # python grid.py grid.shp 992325.66 1484723.41 494849.32 781786.14 10000 10000
         # 
-        sys.exit(1)
+    #    sys.exit(1)
 
-    main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7] )
+    #main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7] )
+
+main("grid_5_5_km.shp", 595061.88, 767348.70, 3274171.33, 3691973.99, 5000, 5000)
+# x min = 595061.88
+# x max = 767348.70
+# y min = 3274171.33
+# y max = 3691973.99
