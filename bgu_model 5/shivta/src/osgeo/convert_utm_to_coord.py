@@ -1,14 +1,14 @@
 import utm
 
-utm_file ='grid_israel_full.csv'
-coord_file = "grid_israel_full_coord.csv"
+utm_file ='grid_5_5_km.csv'
+coord_file = "grid_israel_5_5_km.csv"
 
 israel_latt = 'R'
 israel_num = 36
 
 utm_data = open(utm_file, 'r').readlines()
 coordi_file_out = open(coord_file, 'w')
-coordi_file_out.write("lat,lng,name\n")
+coordi_file_out.write("lat,long,name\n")
 del utm_data[0]
 
 for line in utm_data:
