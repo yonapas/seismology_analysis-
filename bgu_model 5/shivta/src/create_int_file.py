@@ -50,14 +50,16 @@ def create_input(data, input_file):
 	for site in data:
 		title = ''.join(first_line)
 		_lat, _lng = str(site[0]), str(site[1])
+		index = str(site[2]).split("\n")[0]
 		tit = title.replace("LNG", _lng).replace("LAT", _lat)
 		all_site_data.append(tit)
 		# print all_site_data , "\n\n"
-		for num in range(0,6):
-			all_site_data.append("out_{0}_{1}_{2}.out\n".format(num, _lng, _lat))
+		for i in range(0,6):
+			all_site_data.append("out_{0}_{1}.out\n".format(i, index))
+
 
 	finput = finput+all_site_data
-	print finput
+	# print finput
 	save_input(finput)
 
 
@@ -66,7 +68,9 @@ del csv_data[0]
 cord_data = []
 
 for line in csv_data:
-	lat, lng, num = from_utm(line)
+	# lat, lng, num = from_utm(line)
+	line = line.split(",")
+	lat, lng, num = line[0], line[1], line[2]
 	cord_data.append([str(lat), str(lng), num])
 
 create_input(cord_data, input_template)
