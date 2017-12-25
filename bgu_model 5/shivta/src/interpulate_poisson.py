@@ -31,25 +31,23 @@ def convert_to_str(data_float):
 	return data_float
 
 
-def save_in_file(head, data):
+def save_in_file(data, chance):
 	"""
 	the function save data in file
 	get all data, include normal data, and interpolate.
 	save file as poisson+data
 	"""
-	head = convert_to_str(list(head))
-	output_file = open("../csv_data/Poisson_Prob_Interpolate{0}.csv"
-		.format(time.strftime("%Y%m%d%H%M")), "w")
-	output_file.write("AMP, LAT, LNG,"+', '.join(list(head))+"\n")
+	output_file = open("../csv_data/Poisson_Prob_Interpolate_{0}_{1}.csv"
+		.format(str(chance), time.strftime("%Y%m%d%H%M")), "w")
+	output_file.write("LAT, LNG, AMP\n")
 	for coord in data:
-		val = convert_to_str(list(data[coord]))
-		output_file.write("Poisson_Prob, {0}".format(str(coord).replace("_", ","))+', '.join(list(val))+"\n")
+		val = data[coord]
+		output_file.write("{0}, {1}\n".format(str(coord).replace("_", ","), str(val)))
 	output_file.close()
 
 
-
 # open poission data 
-data_to_interpolate = open("../csv_data/Poisson_Prob201711031036.csv").readlines()
+data_to_interpolate = open("../csv_data/Poisson_Prob_data_5_5km.csv").readlines()
 
 headline = data_to_interpolate[0] # take X axis
 del data_to_interpolate[0] # remove from data
@@ -58,7 +56,10 @@ AMP = convert_to_float(y_axis)
 
 
 # interpolate_graph(x_axis, data_to_interpolate)
-x_all_data = {}
+x_all_data_21 = {}
+x_all_data_102 = {}
+x_all_data_404 = {}
+counter = 0
 
 for line in data_to_interpolate:
 	# get coordinate + poisson value
@@ -66,21 +67,37 @@ for line in data_to_interpolate:
 	new_poisson = poiss_chances+interpolate_values
 	new_poisson = sorted(new_poisson)
 	# do interpolate with numpy
-	new_value = interp1d(poiss_chances, AMP)(new_poisson)
+	try:
+		new_value_21 = interp1d(poiss_chances, AMP)(0.0021)
+		x_all_data_21[coord] = float(new_value_21)
+		new_value_102 = interp1d(poiss_chances, AMP)(0.00102)
+		x_all_data_102[coord] = float(new_value_102)
+		new_value_404 = interp1d(poiss_chances, AMP)(0.000404)
+		x_all_data_404[coord] = float(new_value_404)
+	except:
+		counter += 1
 
-	# sort data 
-	full = zip(new_poisson, new_value)
-	full = sorted(full, key=lambda point: point[0])
+
+
+
+	# sort data
+	#full = zip(new_poisson, new_value)
+	#full = sorted(full, key=lambda point: point[0])
 	# print full
-	X, Y = zip(*full)
+	#X, Y = zip(*full)
 
-	print X #
+	# print X
+
 
 	# store in dict
-	x_all_data[coord] = X
+print "\n21\n", len(x_all_data_21)
+print "\n102\n" , len(x_all_data_102)
+print "\n404\n", len(x_all_data_404)
 
-#save_in_file(X, y_all_data)
-
+# print x_all_data_21
+# save_in_file(x_all_data_21, 0.0021)
+save_in_file(x_all_data_102, 0.00102)
+save_in_file(x_all_data_404, 0.000404)
 
 
 

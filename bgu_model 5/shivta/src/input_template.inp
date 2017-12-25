@@ -4,8 +4,8 @@ bgu_segmented.flt
 poligonal_sources_out
 1 1 0  					nProb nAttentyp (nProb, nAttenType, 1 for mixture model 0 otherwise)
 0.01 3 0 					specT maxEps dirflag
-15						nAmps
-0.01 0.015 0.03	0.0536 0.065 0.07 0.0887 0.1 0.12 0.15 0.2 0.25 0.34 0.450
+25						nAmps
+0.02 0.04 0.06 0.08 0.1 0.125 0.15 0.175 0.2 0.225 0.25 0.275 0.3 0.325 0.35 0.375 0.4 0.425 0.45 0.475 0.5 0.525 0.55 0.6 0.6
 1 						nGMmodels
 836	0 0 1 0 1			jCalc const1 const2 wts SigVaradd
 0  					psCorflag

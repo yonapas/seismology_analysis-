@@ -18,7 +18,7 @@ global del_value
 
 
 header_ori = settings.header
-value = settings.value # poisson or something else
+value = settings.value  # poisson or something else
 location = settings.cor
 del_value = settings.nonrelevent
 
@@ -102,5 +102,6 @@ for item in files_name:
 			data.append(line)
 	out_read.close()
 l = len(data[-1])
+print data[-1]
 list_to_array(data, l)
 
