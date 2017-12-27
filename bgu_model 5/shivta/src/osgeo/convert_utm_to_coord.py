@@ -1,7 +1,7 @@
 import utm
 
-utm_file ='grid_5_5_km.csv'
-coord_file = "grid_israel_5_5_km.csv"
+utm_file ='grid_2_2_km_utm.csv'
+coord_file = "grid_israel_2_2_km.csv"
 
 israel_latt = 'R'
 israel_num = 36

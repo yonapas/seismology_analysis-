@@ -62,7 +62,7 @@ def list_to_array(data, l):
 	date = time.strftime("%Y%m%d%H%M")
 
 	# save csv file, in csv folder. add data to title 
-	np.savetxt('../csv_data/'+value+date+".csv", a, delimiter=",", fmt='%s')
+	np.savetxt('../csv_data/10_10_413'+value+date+".csv", a, delimiter=",", fmt='%s')
 	print "create csv file"
 
 # --------------------------------------- #
@@ -76,7 +76,7 @@ data = [firs_line]
 lat, lng = 0, 0
 
 # take all "out" file
-files_name = glob.glob('../outfile/*.out')
+files_name = glob.glob('../output_10_10_413/*.out')
 
 # run for all out file
 for item in files_name:

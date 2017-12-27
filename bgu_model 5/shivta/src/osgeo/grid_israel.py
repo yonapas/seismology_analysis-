@@ -85,8 +85,8 @@ def main(outputGridfn,xmin,xmax,ymin,ymax,gridHeight,gridWidth):
 
     #main(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7] )
 
-main("grid_5_5_km.shp", 595061.88, 767348.70, 3274171.33, 3691973.99, 5000, 5000)
-# x min = 595061.88
-# x max = 767348.70
-# y min = 3274171.33
-# y max = 3691973.99
+main("grid_2_2_km.shp", 599820, 775549, 3267514, 3707752, 2000, 2000)
+# x min = 595061.88, 599820
+# x max = 767348.70, 763782
+# y min = 3274171.33, 3267514
+# y max = 3691973.99,  3707752

@@ -47,7 +47,7 @@ def save_in_file(data, chance):
 
 
 # open poission data 
-data_to_interpolate = open("../csv_data/Poisson_Prob_data_5_5km.csv").readlines()
+data_to_interpolate = open("../csv_data/10_10_413Poisson_Prob201712261829.csv").readlines()
 
 headline = data_to_interpolate[0] # take X axis
 del data_to_interpolate[0] # remove from data
@@ -95,9 +95,9 @@ print "\n102\n" , len(x_all_data_102)
 print "\n404\n", len(x_all_data_404)
 
 # print x_all_data_21
-# save_in_file(x_all_data_21, 0.0021)
-save_in_file(x_all_data_102, 0.00102)
-save_in_file(x_all_data_404, 0.000404)
+save_in_file(x_all_data_21, 0.0021)
+#save_in_file(x_all_data_102, 0.00102)
+#save_in_file(x_all_data_404, 0.000404)
 
 
 
