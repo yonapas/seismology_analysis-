@@ -62,7 +62,7 @@ def list_to_array(data, l):
 	date = time.strftime("%Y%m%d%H%M")
 
 	# save csv file, in csv folder. add data to title 
-	np.savetxt('../csv_data/10_10_413'+value+date+".csv", a, delimiter=",", fmt='%s')
+	np.savetxt('../csv_data/2_2_413'+value+date+".csv", a, delimiter=",", fmt='%s')
 	print "create csv file"
 
 # --------------------------------------- #
@@ -76,10 +76,13 @@ data = [firs_line]
 lat, lng = 0, 0
 
 # take all "out" file
-files_name = glob.glob('../output_10_10_413/*.out')
+files_name = glob.glob('../outfile/*.out')
 
 # run for all out file
 for item in files_name:
+
+	# find site index for grid
+	site_num = item.split("_")[-1].split(".")[0]
 	
 	# open file:
 	out_read = open(item, 'r')
@@ -94,11 +97,12 @@ for item in files_name:
 			cord = line.split(" ")
 			cord = orgenize_line.orgenize(line)
 			lat, lng = cord[-1], cord[-2]
-			site_num = cord[1]
-		
+
 		if value in line:
 			# find one value in file
 			line = orgenize_line.orgenize(line, lat, lng)
+			# set index of site
+			line[0] = site_num
 			data.append(line)
 	out_read.close()
 l = len(data[-1])

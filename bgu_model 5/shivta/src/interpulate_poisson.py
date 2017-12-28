@@ -14,12 +14,15 @@ def cord_and_value(y_line):
 	"""
 
 	line = y_line.split(",")
-	lat_long = "{0}_{1}".format(line[1], line[2])
+
+	index = line[0]
+	# lat_long = "{0}_{1}".format(line[1], line[2])
 	y_axis = line[3:] #take only values
 	# convert to float 
 	y_axis = convert_to_float(y_axis)
 
-	return lat_long, y_axis
+	# return lat_long, y_axis
+	return index, y_axis
 
 
 def convert_to_float(data_str):
@@ -37,9 +40,10 @@ def save_in_file(data, chance):
 	get all data, include normal data, and interpolate.
 	save file as poisson+data
 	"""
-	output_file = open("../csv_data/Poisson_Prob_Interpolate_{0}_{1}.csv"
+	output_file = open("../csv_data/Poisson_Prob_Interpolate_2_{0}_{1}.csv"
 		.format(str(chance), time.strftime("%Y%m%d%H%M")), "w")
-	output_file.write("LAT, LNG, AMP\n")
+	# output_file.write("LAT, LNG, AMP\n")
+	output_file.write("INDEX, AMP\n")
 	for coord in data:
 		val = data[coord]
 		output_file.write("{0}, {1}\n".format(str(coord).replace("_", ","), str(val)))
@@ -47,7 +51,7 @@ def save_in_file(data, chance):
 
 
 # open poission data 
-data_to_interpolate = open("../csv_data/10_10_413Poisson_Prob201712261829.csv").readlines()
+data_to_interpolate = open("../csv_data/2_2_413Poisson_Prob201712282219.csv").readlines()
 
 headline = data_to_interpolate[0] # take X axis
 del data_to_interpolate[0] # remove from data
@@ -96,8 +100,8 @@ print "\n404\n", len(x_all_data_404)
 
 # print x_all_data_21
 save_in_file(x_all_data_21, 0.0021)
-#save_in_file(x_all_data_102, 0.00102)
-#save_in_file(x_all_data_404, 0.000404)
+save_in_file(x_all_data_102, 0.00102)
+save_in_file(x_all_data_404, 0.000404)
 
 
 
