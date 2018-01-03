@@ -9,7 +9,7 @@ def indices(list, filtr=lambda x: bool(x)):
 
 
 full_csv_data = open("osgeo/grid_israel_2_2_km.csv", "r").readlines()
-amp_csv_data = open("../csv_data/Poisson_Prob_Interpolate_2_0.000404_201712282220.csv", 'r').readlines()
+amp_csv_data = open("../csv_data/Poisson_Prob_Interpolate_protocol_0.0021_201801011013.csv", 'r').readlines()
 
 del full_csv_data[0], amp_csv_data[0]
 
@@ -58,7 +58,7 @@ print len(full_grig_amp), "amp"
 print len(full_grid_lat), "lat"
 print len(full_grid_lng), "lng"
 
-out_file_xyz = open("../outfile/data_2_2_0.0004.txt", "w")
+out_file_xyz = open("../outfile/data_5_10_0.0004.txt", "w")
 for i in range(len(all_num_full)):
 	out_file_xyz.write("{0}, {1}, {2}\n".format(str(all_lng_full[i]), str(all_lat_full[i]), str(all_num_full[i])))
 

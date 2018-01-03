@@ -47,7 +47,7 @@ def clean_array(array, head):
 	return b
 
 
-def list_to_array(data, l):
+def list_to_array(data, l, param, save):
 	"""
 	this function get data (in lists)
 	and convert it to csv file.
@@ -55,57 +55,62 @@ def list_to_array(data, l):
 	"""
 	a = np.array(data)
 	a.reshape((len(data), l))
-
-	if del_value:
-		a = clean_array(a, data[0])
-	 
+	a = clean_array(a, data[0])
 	date = time.strftime("%Y%m%d%H%M")
 
-	# save csv file, in csv folder. add data to title 
-	np.savetxt('../csv_data/2_2_413'+value+date+".csv", a, delimiter=",", fmt='%s')
-	print "create csv file"
-
+	if save:
+		# save csv file, in csv folder. add data to title
+		np.savetxt('../csv_data/{0}_{1}_{2}.csv'.format(param, value, date), a, delimiter=",", fmt='%s')
+		print "create csv file"
+	a_list = a.tolist()
+	return a_list
 # --------------------------------------- #
 # start script here!                      #
 
 
 # define header line  to csv and store in data
-firs_line = orgenize_line.orgenize(header_ori, "LAT", "LONG")
-data = [firs_line]
+def create(folder, parameter, writeToFile=False):
+	firs_line = orgenize_line.orgenize(header_ori, "LAT", "LONG")
+	data = [firs_line]
 
-lat, lng = 0, 0
+	lat, lng = 0, 0
 
-# take all "out" file
-files_name = glob.glob('../outfile/*.out')
+	# take all "out" file
+	files_name = glob.glob('../{0}/*.out'.format(folder))
 
-# run for all out file
-for item in files_name:
+	# run for all out file
+	for item in files_name:
 
-	# find site index for grid
-	site_num = item.split("_")[-1].split(".")[0]
-	
-	# open file:
-	out_read = open(item, 'r')
-	lines = out_read.readlines()
-	# find value in line, and store it
-	for line in lines:
-		if location in line:
+		# find site index for grid
+		site_num = item.split("_")[-1].split(".")[0]
 
-			# find lat-long in site
-			# find site number (case few site in one out-file)
-			# for now - do nothing with site number #
-			cord = line.split(" ")
-			cord = orgenize_line.orgenize(line)
-			lat, lng = cord[-1], cord[-2]
+		# open file:
+		out_read = open(item, 'r')
+		lines = out_read.readlines()
+		# find value in line, and store it
+		for line in lines:
+			if location in line:
 
-		if value in line:
-			# find one value in file
-			line = orgenize_line.orgenize(line, lat, lng)
-			# set index of site
-			line[0] = site_num
-			data.append(line)
-	out_read.close()
-l = len(data[-1])
-print data[-1]
-list_to_array(data, l)
+				# find lat-long in site
+				# find site number (case few site in one out-file)
+				# for now - do nothing with site number #
+				cord = line.split(" ")
+				cord = orgenize_line.orgenize(line)
+				lat, lng = cord[-1], cord[-2]
+
+			if value in line:
+				# find one value in file
+				line = orgenize_line.orgenize(line, lat, lng)
+				# set index of site
+				line[0] = site_num
+				data.append(line)
+		out_read.close()
+	l = len(data[-1])
+	# print data[0]
+	clean_data = list_to_array(data, l, parameter, writeToFile)
+	# print clean_data
+	return clean_data
+
+# create("outfile", "test")
+
 
