@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 import settings
 import time
@@ -35,14 +35,13 @@ def convert_to_str(data_float):
 	return data_float
 
 
-def save_in_file(data, chance):
+def save_in_file(data, chance, name):
 	"""
 	the function save data in file
 	get all data, include normal data, and interpolate.
 	save file as poisson+data
 	"""
-	output_file = open("../csv_data/Poisson_Prob_Interpolate_protocol_{0}_{1}.csv"
-		.format(str(chance), time.strftime("%Y%m%d%H%M")), "w")
+	output_file = open("../csv_data/{0}_{1}_{2}.csv".format(name, str(chance), time.strftime("%Y%m%d%H%M")), "w")
 	# output_file.write("LAT, LNG, AMP\n")
 	output_file.write("INDEX, AMP\n")
 	for coord in data:
@@ -51,7 +50,8 @@ def save_in_file(data, chance):
 		output_file.write("{0}, {1}, {2}\n".format(str(loc).replace("_", ","), str(coord), str(val)))
 	output_file.close()
 
-def interpulate(poisson_data, name, saveFiles=False):
+
+def interpolate(poisson_data, name, saveFiles=False):
 	# open poission data
 	# data_to_interpolate = open("../csv_data/5_10_413_protoPoisson_Prob201801011010.csv").readlines()
 	data_to_interpolate = poisson_data
@@ -91,9 +91,9 @@ def interpulate(poisson_data, name, saveFiles=False):
 	print "\n404\n", len(x_all_data_404)
 
 	if saveFiles:
-		save_in_file(x_all_data_21, 0.0021)
-		save_in_file(x_all_data_102, 0.00102)
-		save_in_file(x_all_data_404, 0.000404)
+		save_in_file(x_all_data_21, 0.0021, name)
+		save_in_file(x_all_data_102, 0.00102, name)
+		save_in_file(x_all_data_404, 0.000404, name)
 
 
 

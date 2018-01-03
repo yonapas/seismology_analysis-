@@ -17,7 +17,6 @@ global value
 global del_value
 
 
-header_ori = settings.header
 value = settings.value  # poisson or something else
 location = settings.cor
 del_value = settings.nonrelevent
@@ -70,13 +69,24 @@ def list_to_array(data, l, param, save):
 
 # define header line  to csv and store in data
 def create(folder, parameter, writeToFile=False):
-	firs_line = orgenize_line.orgenize(header_ori, "LAT", "LONG")
-	data = [firs_line]
 
 	lat, lng = 0, 0
 
 	# take all "out" file
-	files_name = glob.glob('../{0}/*.out'.format(folder))
+	files_name = glob.glob('../{0}/out_4_*.out'.format(folder))
+	print len(files_name)
+	header = None
+
+	one_file = open(files_name[0], "r").readlines()
+	for line in one_file:
+		if "AMP" in line:
+			header = line
+
+	if header:
+		firs_line = orgenize_line.orgenize(header, "LAT", "LONG")
+		data = [firs_line]
+	else:
+		print "Error With Fiels, can't find AMP values from out_4"
 
 	# run for all out file
 	for item in files_name:
@@ -111,6 +121,6 @@ def create(folder, parameter, writeToFile=False):
 	# print clean_data
 	return clean_data
 
-# create("outfile", "test")
+create("outfile", "test")
 
 
