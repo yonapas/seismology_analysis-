@@ -12,4 +12,5 @@ name = settings.folder_4_output
 poisson_data = create_csv_value.create(data_folder, name)
 
 # interpolate, and write to file
-interpolate_poisson.interpolate(poisson_data, name, saveFiles=True)
+if poisson_data:
+	interpolate_poisson.interpolate(poisson_data, name, saveFiles=True)

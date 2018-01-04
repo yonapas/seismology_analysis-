@@ -74,13 +74,17 @@ def create(folder, parameter, writeToFile=False):
 
 	# take all "out" file
 	files_name = glob.glob('../{0}/out_4_*.out'.format(folder))
-	print len(files_name)
 	header = None
 
-	one_file = open(files_name[0], "r").readlines()
-	for line in one_file:
-		if "AMP" in line:
-			header = line
+	if len(files_name)> 0:
+
+		one_file = open(files_name[0], "r").readlines()
+		for line in one_file:
+			if "AMP" in line:
+				header = line
+	else:
+		print "No OUT_4 files found, please check again your settings,\n and make shore your src file in right path"
+		return None
 
 	if header:
 		firs_line = orgenize_line.orgenize(header, "LAT", "LONG")
