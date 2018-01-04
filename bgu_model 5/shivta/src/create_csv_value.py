@@ -76,7 +76,7 @@ def create(folder, parameter, writeToFile=False):
 	files_name = glob.glob('../{0}/out_4_*.out'.format(folder))
 	header = None
 
-	if len(files_name)> 0:
+	if len(files_name) > 0:
 
 		one_file = open(files_name[0], "r").readlines()
 		for line in one_file:
@@ -125,6 +125,6 @@ def create(folder, parameter, writeToFile=False):
 	# print clean_data
 	return clean_data
 
-create("outfile", "test")
+# create("outfile", "test")
 
 

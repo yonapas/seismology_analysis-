@@ -23,15 +23,20 @@ def utm_to_lat_lng(infile, outfile):
 	print "done"
 
 def lat_lng_to_utm(infile, outfile):
+	print "lat long to utm"
 	coord_data = open(infile, "r").readlines()
+	del coord_data[0]
 	utm_out = open(outfile, "w")
-	utm_out.write("utm\n")
+	# utm_out.write("utm\n")
 
 	for line in coord_data:
 		line = line.split(",")
-		lat, lng, id = float(line[0]), float(line[1]), line[2]
+		lat, lng, id, amp = float(line[0]), float(line[1]), line[2], line[3]
 		u = utm.from_latlon(lat, lng)
-		utm_out.write("{0}, {1}, 36, S\n".format(str(u[0]), str(u[1])))
+		amp = amp.split("\n")[0]
+		print u
+		utm_out.write("{0}, {1}, {2}, 36, R, {3}\n".format(id, str(u[0]), str(u[1]), amp))
 
 
-lat_lng_to_utm("../../csv_data/data_5_5_0.0021.txt", "utm_5_5_0.0021.csv")
+
+lat_lng_to_utm("../../csv_data/GII_413Klar_CB08_0.000404.csv", "utm_GII_413Klar_CB08_0.000404.txt")
